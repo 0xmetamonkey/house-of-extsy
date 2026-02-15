@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function Marquee({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`overflow-hidden ${className}`}>
+    <div className={`overflow-hidden marquee-container ${className}`}>
       <div className="marquee-track">
         {children}
         {children}
@@ -37,8 +37,8 @@ export function FadeIn({ children, className = "", delay = 0 }: { children: Reac
       className={className}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(40px)",
-        transition: `opacity 0.8s ease ${delay}ms, transform 0.8s ease ${delay}ms`,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transition: `opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}ms, transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}ms`,
       }}
     >
       {children}
@@ -84,4 +84,14 @@ export function Counter({ target, suffix = "" }: { target: number; suffix?: stri
   }, [started, target]);
 
   return <span ref={ref}>{count}{suffix}</span>;
+}
+
+export function LiquidBlobs({ className = "" }: { className?: string }) {
+  return (
+    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
+      <div className="liquid-blob liquid-blob-1 -top-40 -right-40" />
+      <div className="liquid-blob liquid-blob-2 top-1/3 -left-32" />
+      <div className="liquid-blob liquid-blob-3 bottom-20 right-1/4" />
+    </div>
+  );
 }

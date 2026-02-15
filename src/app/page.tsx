@@ -1,70 +1,45 @@
 import Link from "next/link";
-import { Marquee, FadeIn, Counter } from "./components";
+import Image from "next/image";
+import { Marquee, FadeIn, Counter, LiquidBlobs } from "./components";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#050505] text-white">
+    <div className="min-h-screen bg-[#fafafa] text-[#1d1d1f]">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 bg-[#050505]/60 backdrop-blur-xl border-b border-white/[0.04] md:px-12">
-        <div className="text-lg font-bold tracking-[-0.08em] uppercase">House of Extsy</div>
-        <div className="hidden space-x-10 text-[13px] font-medium text-white/40 md:flex">
-          <Link href="#work" className="hover:text-white transition-colors duration-300">Work</Link>
-          <Link href="#how-it-works" className="hover:text-white transition-colors duration-300">Process</Link>
-          <Link href="#services" className="hover:text-white transition-colors duration-300">Scope</Link>
-          <Link href="#pricing" className="hover:text-white transition-colors duration-300">Pricing</Link>
-          <Link href="#faq" className="hover:text-white transition-colors duration-300">FAQ</Link>
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-2xl border-b border-black/[0.04] md:px-12 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+        <Link href="/">
+          <Image src="/extsy-e-logo.png" alt="House of Extsy" width={60} height={60} className="h-12 w-auto" />
+        </Link>
+        <div className="hidden space-x-10 text-[13px] font-medium text-[#86868b] md:flex">
+          <Link href="#work" className="hover:text-[#1d1d1f] transition-colors duration-500">Work</Link>
+          <Link href="#how-it-works" className="hover:text-[#1d1d1f] transition-colors duration-500">Process</Link>
+          <Link href="#services" className="hover:text-[#1d1d1f] transition-colors duration-500">Scope</Link>
+          <Link href="#pricing" className="hover:text-[#1d1d1f] transition-colors duration-500">Pricing</Link>
+          <Link href="#faq" className="hover:text-[#1d1d1f] transition-colors duration-500">FAQ</Link>
         </div>
         <div className="flex items-center gap-5">
-          <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="hidden md:block text-[13px] font-medium text-white/40 hover:text-white transition-colors duration-300">
+          <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="hidden md:block text-[13px] font-medium text-[#86868b] hover:text-[#1d1d1f] transition-colors duration-500">
             Book a call
           </Link>
-          <Link href="#pricing" className="px-6 py-2.5 text-[13px] font-semibold bg-white text-black rounded-full hover:bg-white/90 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+          <Link href="#pricing" className="px-6 py-2.5 text-[13px] font-semibold bg-[#1d1d1f] text-white rounded-full hover:bg-black transition-all duration-500 hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)]">
             Get Started
           </Link>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-44 pb-32 px-6 md:pt-56 md:pb-44 md:px-12 overflow-hidden">
-        {/* Spotlight effect */}
-        <div className="spotlight absolute inset-0 pointer-events-none" />
-
-        <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center">
-          {/* Pill badge */}
+      <section className="relative pt-44 pb-32 px-6 md:pt-56 md:pb-44 md:px-12 overflow-hidden bg-white">
+        <LiquidBlobs />
+        <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center justify-center">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-10 rounded-full border border-white/10 bg-white/[0.03] text-[13px] text-white/50">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              Now accepting new clients for Q1 2026
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={100}>
-            <h1 className="hero-text text-[clamp(3rem,8vw,8rem)] font-black mb-10 leading-[0.92]">
-              Branding on<br />
-              subscription.
-            </h1>
-          </FadeIn>
-
-          <FadeIn delay={200}>
-            <p className="max-w-lg text-lg md:text-xl text-white/35 mb-14 leading-relaxed font-light">
-              Premium brand identity, delivered fast.<br className="hidden md:block" />
-              No meetings. No contracts. No BS.
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={300}>
-            <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <Link href="#pricing" className="group relative px-10 py-4.5 text-base font-bold bg-white text-black rounded-full transition-all duration-500 hover:shadow-[0_0_50px_rgba(255,255,255,0.25)] hover:scale-[1.03]">
-                See the plans
-                <span className="absolute inset-0 rounded-full bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </Link>
-              <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="group flex items-center gap-3 px-8 py-4 text-base font-medium text-white/40 hover:text-white transition-all duration-300">
-                Book a call
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
+            <Image
+              src="/extsy-hero.png"
+              alt="extsy"
+              width={1100}
+              height={1100}
+              className="w-full max-w-[1100px] h-auto"
+              priority
+            />
           </FadeIn>
         </div>
       </section>
@@ -72,23 +47,23 @@ export default function Home() {
       {/* Stats bar */}
       <FadeIn>
         <div className="line-fade" />
-        <div className="py-16 px-6 md:px-12">
+        <div className="py-20 px-6 md:px-12 bg-white">
           <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl md:text-5xl font-black mb-2"><Counter target={150} suffix="+" /></div>
-              <div className="text-[13px] text-white/30 uppercase tracking-widest">Brands built</div>
+              <div className="text-4xl md:text-5xl font-black mb-2 text-[#1d1d1f]"><Counter target={150} suffix="+" /></div>
+              <div className="text-[13px] text-[#86868b] uppercase tracking-widest">Brands built</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-black mb-2"><Counter target={48} suffix="h" /></div>
-              <div className="text-[13px] text-white/30 uppercase tracking-widest">Avg. delivery</div>
+              <div className="text-4xl md:text-5xl font-black mb-2 text-[#1d1d1f]"><Counter target={48} suffix="h" /></div>
+              <div className="text-[13px] text-[#86868b] uppercase tracking-widest">Avg. delivery</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-black mb-2"><Counter target={100} suffix="%" /></div>
-              <div className="text-[13px] text-white/30 uppercase tracking-widest">Satisfaction</div>
+              <div className="text-4xl md:text-5xl font-black mb-2 text-[#1d1d1f]"><Counter target={100} suffix="%" /></div>
+              <div className="text-[13px] text-[#86868b] uppercase tracking-widest">Satisfaction</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-black mb-2">&#8734;</div>
-              <div className="text-[13px] text-white/30 uppercase tracking-widest">Revisions</div>
+              <div className="text-4xl md:text-5xl font-black mb-2 text-[#1d1d1f]">&#8734;</div>
+              <div className="text-[13px] text-[#86868b] uppercase tracking-widest">Revisions</div>
             </div>
           </div>
         </div>
@@ -96,11 +71,11 @@ export default function Home() {
       </FadeIn>
 
       {/* Marquee brand wall */}
-      <section className="py-14 overflow-hidden">
+      <section className="py-16 overflow-hidden bg-[#fafafa]">
         <Marquee>
           <div className="flex items-center gap-20 px-10">
             {["FLOWBASE", "MEMBERSTACK", "RELOOM", "FINSWEET", "AIRTABLE", "WEBFLOW", "NOTION", "LOOM"].map((brand) => (
-              <span key={brand} className="text-xl md:text-2xl font-bold text-white/[0.12] whitespace-nowrap tracking-widest uppercase hover:text-white/30 transition-colors duration-500 cursor-default">
+              <span key={brand} className="text-xl md:text-2xl font-bold text-black/[0.08] whitespace-nowrap tracking-widest uppercase hover:text-black/20 transition-colors duration-500 cursor-default">
                 {brand}
               </span>
             ))}
@@ -109,19 +84,20 @@ export default function Home() {
       </section>
 
       {/* Recent Work / Portfolio */}
-      <section id="work" className="py-32 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
+      <section id="work" className="py-32 px-6 md:px-12 bg-white relative">
+        <LiquidBlobs className="opacity-30" />
+        <div className="max-w-7xl mx-auto relative z-10">
           <FadeIn>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
               <div>
-                <p className="text-[13px] text-white/30 uppercase tracking-[0.2em] mb-4">Selected work</p>
-                <h2 className="text-4xl md:text-7xl font-black hero-text">
+                <p className="text-[13px] text-[#86868b] uppercase tracking-[0.2em] mb-4">Selected work</p>
+                <h2 className="text-4xl md:text-7xl font-black hero-text text-[#1d1d1f]">
                   Elite branding,<br />delivered daily.
                 </h2>
               </div>
-              <Link href="#pricing" className="group flex items-center gap-3 text-base font-medium text-white/40 hover:text-white transition-all duration-300">
+              <Link href="#pricing" className="group flex items-center gap-3 text-base font-medium text-[#86868b] hover:text-[#1d1d1f] transition-all duration-500">
                 Start your project
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300">
+                <div className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center group-hover:bg-[#1d1d1f] group-hover:text-white transition-all duration-500">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </div>
               </Link>
@@ -130,18 +106,18 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              { title: "Velocity AI", category: "Full Identity System", shade: "bg-white/[0.04]" },
-              { title: "Lumina", category: "Brand Strategy & Logo", shade: "bg-white/[0.07]" },
-              { title: "Nexus", category: "Visual Guidelines", shade: "bg-white/[0.07]" },
-              { title: "Aura", category: "Packaging & Print", shade: "bg-white/[0.04]" }
+              { title: "Velocity AI", category: "Full Identity System", gradient: "from-violet-50 to-blue-50" },
+              { title: "Lumina", category: "Brand Strategy & Logo", gradient: "from-pink-50 to-rose-50" },
+              { title: "Nexus", category: "Visual Guidelines", gradient: "from-sky-50 to-cyan-50" },
+              { title: "Aura", category: "Packaging & Print", gradient: "from-amber-50 to-orange-50" }
             ].map((work, idx) => (
               <FadeIn key={idx} delay={idx * 100}>
                 <div className="group cursor-pointer">
-                  <div className={`aspect-[16/10] ${work.shade} rounded-3xl mb-6 overflow-hidden relative border border-white/[0.04] transition-all duration-700 group-hover:border-white/10 group-hover:scale-[0.98]`}>
+                  <div className={`aspect-[16/10] bg-gradient-to-br ${work.gradient} rounded-3xl mb-6 overflow-hidden relative border border-black/[0.04] transition-all duration-700 group-hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] group-hover:scale-[0.98]`}>
                     {/* Abstract pattern */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="relative">
-                        <span className="text-[8rem] md:text-[10rem] font-black text-white/[0.03] group-hover:text-white/[0.07] transition-all duration-700 select-none">
+                        <span className="text-[8rem] md:text-[10rem] font-black text-black/[0.04] group-hover:text-black/[0.08] transition-all duration-700 select-none">
                           {work.title.charAt(0)}
                         </span>
                       </div>
@@ -149,10 +125,10 @@ export default function Home() {
                     {/* Bottom label inside card */}
                     <div className="absolute bottom-0 left-0 right-0 p-8 flex justify-between items-end">
                       <div>
-                        <h3 className="text-xl font-bold mb-1">{work.title}</h3>
-                        <p className="text-white/30 text-sm">{work.category}</p>
+                        <h3 className="text-xl font-bold mb-1 text-[#1d1d1f]">{work.title}</h3>
+                        <p className="text-[#86868b] text-sm">{work.category}</p>
                       </div>
-                      <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-white group-hover:text-black">
+                      <div className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:bg-[#1d1d1f] group-hover:text-white">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
                       </div>
                     </div>
@@ -165,24 +141,24 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="py-32 px-6 md:px-12">
+      <section id="how-it-works" className="py-32 px-6 md:px-12 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
-            <p className="text-[13px] text-white/30 uppercase tracking-[0.2em] mb-4">How it works</p>
-            <h2 className="text-4xl md:text-6xl font-black hero-text mb-20">Three simple steps.</h2>
+            <p className="text-[13px] text-[#86868b] uppercase tracking-[0.2em] mb-4">How it works</p>
+            <h2 className="text-4xl md:text-6xl font-black hero-text mb-20 text-[#1d1d1f]">Three simple steps.</h2>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.04] rounded-3xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { num: "01", title: "Subscribe", desc: "Pick a plan and subscribe in minutes. No calls, no contracts, no hassle." },
               { num: "02", title: "Request", desc: "Add branding requests to your queue. Logos, identities, guidelines\u2014anything." },
               { num: "03", title: "Receive", desc: "Get your assets in 48 hours. Unlimited revisions until it\u2019s perfect." }
             ].map((step, idx) => (
               <FadeIn key={idx} delay={idx * 150}>
-                <div className="p-10 md:p-12 bg-[#050505] h-full group hover:bg-white/[0.02] transition-colors duration-500">
-                  <span className="text-6xl md:text-7xl font-black text-white/[0.06] group-hover:text-white/[0.12] transition-colors duration-500 block mb-8">{step.num}</span>
-                  <h3 className="text-2xl font-bold mb-4">{step.title}</h3>
-                  <p className="text-white/40 leading-relaxed">{step.desc}</p>
+                <div className="glass-card p-10 md:p-12 h-full group">
+                  <span className="text-6xl md:text-7xl font-black text-black/[0.05] group-hover:text-black/[0.1] transition-colors duration-700 block mb-8">{step.num}</span>
+                  <h3 className="text-2xl font-bold mb-4 text-[#1d1d1f]">{step.title}</h3>
+                  <p className="text-[#86868b] leading-relaxed">{step.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -191,14 +167,14 @@ export default function Home() {
       </section>
 
       {/* Services / Scope */}
-      <section id="services" className="py-32">
-        <div className="px-6 md:px-12 max-w-7xl mx-auto">
+      <section id="services" className="py-32 bg-white relative">
+        <div className="px-6 md:px-12 max-w-7xl mx-auto relative z-10">
           <FadeIn>
-            <p className="text-[13px] text-white/30 uppercase tracking-[0.2em] mb-4">What we do</p>
-            <h2 className="text-4xl md:text-6xl font-black mb-6 hero-text">
+            <p className="text-[13px] text-[#86868b] uppercase tracking-[0.2em] mb-4">What we do</p>
+            <h2 className="text-4xl md:text-6xl font-black mb-6 hero-text text-[#1d1d1f]">
               Brand identities that<br className="hidden md:block" /> define generations.
             </h2>
-            <p className="text-lg text-white/35 max-w-xl mb-20 font-light">From logos to full-scale brand systems, we cover every aspect of your visual strategy.</p>
+            <p className="text-lg text-[#86868b] max-w-xl mb-20">From logos to full-scale brand systems, we cover every aspect of your visual strategy.</p>
           </FadeIn>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -208,7 +184,7 @@ export default function Home() {
               "Pitch Decks", "Web Design", "Iconography", "Packaging"
             ].map((service, idx) => (
               <FadeIn key={service} delay={idx * 50}>
-                <div className="group relative p-6 md:p-8 rounded-2xl border border-white/[0.04] bg-white/[0.01] hover:bg-white hover:text-black transition-all duration-500 cursor-default overflow-hidden glow-border">
+                <div className="group relative p-6 md:p-8 rounded-2xl border border-black/[0.04] bg-white hover:bg-[#1d1d1f] hover:text-white transition-all duration-500 cursor-default overflow-hidden hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] hover:-translate-y-1">
                   <div className="relative z-10 text-base md:text-lg font-semibold">{service}</div>
                 </div>
               </FadeIn>
@@ -218,70 +194,70 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-32 px-6 md:px-12 relative">
-        <div className="spotlight absolute inset-0 pointer-events-none" />
+      <section id="pricing" className="py-32 px-6 md:px-12 relative bg-[#fafafa]">
+        <LiquidBlobs className="opacity-20" />
         <div className="max-w-7xl mx-auto relative z-10">
           <FadeIn>
             <div className="text-center mb-20">
-              <p className="text-[13px] text-white/30 uppercase tracking-[0.2em] mb-4">Pricing</p>
-              <h2 className="text-4xl md:text-6xl font-black mb-6 hero-text">Simple. Transparent.</h2>
-              <p className="text-lg text-white/35 font-light">One monthly fee. Unlimited possibilities. Cancel anytime.</p>
+              <p className="text-[13px] text-[#86868b] uppercase tracking-[0.2em] mb-4">Pricing</p>
+              <h2 className="text-4xl md:text-6xl font-black mb-6 hero-text text-[#1d1d1f]">Simple. Transparent.</h2>
+              <p className="text-lg text-[#86868b]">One monthly fee. Unlimited possibilities. Cancel anytime.</p>
             </div>
           </FadeIn>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {/* Standard Plan */}
             <FadeIn delay={0}>
-              <div className="relative p-10 md:p-12 rounded-[2.5rem] border border-white/[0.06] bg-white/[0.015] flex flex-col h-full glow-border">
-                <div className="text-sm font-semibold text-white/40 uppercase tracking-widest mb-4">Standard</div>
+              <div className="glass-card relative p-10 md:p-12 flex flex-col h-full">
+                <div className="text-sm font-semibold text-[#86868b] uppercase tracking-widest mb-4">Standard</div>
                 <div className="flex items-baseline gap-1 mb-10">
-                  <span className="text-5xl md:text-6xl font-black">$4,995</span>
-                  <span className="text-base text-white/30 font-medium">/mo</span>
+                  <span className="text-5xl md:text-6xl font-black text-[#1d1d1f]">$4,995</span>
+                  <span className="text-base text-[#86868b] font-medium">/mo</span>
                 </div>
                 <ul className="space-y-5 mb-12 flex-grow">
                   {["Unlimited branding requests", "Unlimited revisions", "48-hour delivery", "One request at a time", "Pause or cancel anytime"].map((item) => (
-                    <li key={item} className="flex items-center gap-4 text-white/50">
-                      <div className="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center flex-shrink-0">
-                        <svg className="w-3 h-3 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                    <li key={item} className="flex items-center gap-4 text-[#86868b]">
+                      <div className="w-5 h-5 rounded-full border border-black/10 flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3 h-3 text-[#1d1d1f]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                       </div>
                       {item}
                     </li>
                   ))}
                 </ul>
-                <button className="w-full py-5 bg-white/10 text-white rounded-full font-bold text-base hover:bg-white hover:text-black transition-all duration-500">Get started</button>
+                <button className="w-full py-5 bg-[#f5f5f7] text-[#1d1d1f] rounded-full font-bold text-base hover:bg-[#1d1d1f] hover:text-white transition-all duration-500">Get started</button>
               </div>
             </FadeIn>
 
             {/* Pro Plan */}
             <FadeIn delay={150}>
-              <div className="relative p-10 md:p-12 rounded-[2.5rem] border border-white/10 bg-white/[0.03] flex flex-col h-full glow-border">
-                <div className="absolute top-8 right-8 px-3 py-1 bg-white text-black text-[10px] font-black uppercase tracking-wider rounded-full">Most Popular</div>
-                <div className="text-sm font-semibold text-white/40 uppercase tracking-widest mb-4">Pro</div>
+              <div className="glass-card relative p-10 md:p-12 flex flex-col h-full border-[#1d1d1f]/10">
+                <div className="absolute top-8 right-8 px-3 py-1 bg-[#1d1d1f] text-white text-[10px] font-black uppercase tracking-wider rounded-full">Most Popular</div>
+                <div className="text-sm font-semibold text-[#86868b] uppercase tracking-widest mb-4">Pro</div>
                 <div className="flex items-baseline gap-1 mb-10">
-                  <span className="text-5xl md:text-6xl font-black">$6,995</span>
-                  <span className="text-base text-white/30 font-medium">/mo</span>
+                  <span className="text-5xl md:text-6xl font-black text-[#1d1d1f]">$6,995</span>
+                  <span className="text-base text-[#86868b] font-medium">/mo</span>
                 </div>
                 <ul className="space-y-5 mb-12 flex-grow">
                   {["Everything in Standard", "Brand strategy included", "Two requests at a time", "Priority 24-hour delivery", "Brand messaging & voice"].map((item) => (
-                    <li key={item} className="flex items-center gap-4 text-white/50">
-                      <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <li key={item} className="flex items-center gap-4 text-[#86868b]">
+                      <div className="w-5 h-5 rounded-full bg-[#1d1d1f] flex items-center justify-center flex-shrink-0">
                         <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                       </div>
                       {item}
                     </li>
                   ))}
                 </ul>
-                <button className="w-full py-5 bg-white text-black rounded-full font-bold text-base hover:scale-[1.02] transition-all duration-300 pulse-glow">Get started</button>
+                <button className="w-full py-5 bg-[#1d1d1f] text-white rounded-full font-bold text-base hover:scale-[1.02] transition-all duration-500 pulse-glow">Get started</button>
               </div>
             </FadeIn>
           </div>
 
           <FadeIn delay={300}>
             <div className="mt-16 text-center">
-              <p className="text-white/25 mb-5 text-sm italic">Not sure yet? Let&apos;s talk about your brand.</p>
-              <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="group inline-flex items-center gap-3 text-base font-semibold text-white/50 hover:text-white transition-all duration-300">
+              <p className="text-[#86868b] mb-5 text-sm italic">Not sure yet? Let&apos;s talk about your brand.</p>
+              <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="group inline-flex items-center gap-3 text-base font-semibold text-[#86868b] hover:text-[#1d1d1f] transition-all duration-500">
                 Book a free discovery call
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
               </Link>
             </div>
           </FadeIn>
@@ -291,8 +267,8 @@ export default function Home() {
       {/* FAQ Section */}
       <section id="faq" className="py-32 px-6 md:px-12 max-w-4xl mx-auto">
         <FadeIn>
-          <p className="text-[13px] text-white/30 uppercase tracking-[0.2em] mb-4 text-center">FAQ</p>
-          <h2 className="text-4xl md:text-6xl font-black mb-20 text-center hero-text">Questions &amp; Answers.</h2>
+          <p className="text-[13px] text-[#86868b] uppercase tracking-[0.2em] mb-4 text-center">FAQ</p>
+          <h2 className="text-4xl md:text-6xl font-black mb-20 text-center hero-text text-[#1d1d1f]">Questions &amp; Answers.</h2>
         </FadeIn>
 
         <div className="space-y-4">
@@ -305,12 +281,12 @@ export default function Home() {
             { q: "Can I pause or cancel?", a: "Absolutely. Pause when things slow down, pick back up when you\u2019re ready. Cancel anytime, no penalties." }
           ].map((item, idx) => (
             <FadeIn key={idx} delay={idx * 80}>
-              <div className="group p-8 rounded-2xl border border-white/[0.04] bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/[0.08] transition-all duration-500 cursor-default">
-                <h3 className="text-lg font-bold mb-3 flex items-center gap-4">
-                  <span className="text-sm text-white/15 font-mono">0{idx + 1}</span>
+              <div className="group glass-card p-8 cursor-default">
+                <h3 className="text-lg font-bold mb-3 flex items-center gap-4 text-[#1d1d1f]">
+                  <span className="text-sm text-[#86868b]/40 font-mono">0{idx + 1}</span>
                   {item.q}
                 </h3>
-                <p className="text-white/35 leading-relaxed pl-10 text-[15px]">
+                <p className="text-[#86868b] leading-relaxed pl-10 text-[15px]">
                   {item.a}
                 </p>
               </div>
@@ -320,15 +296,15 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-44 px-6 text-center relative overflow-hidden">
-        <div className="spotlight absolute inset-0 pointer-events-none opacity-60" />
+      <section className="py-44 px-6 text-center relative overflow-hidden bg-white">
+        <LiquidBlobs />
         <FadeIn>
           <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-[8rem] font-black mb-10 hero-text leading-[0.85]">
+            <h2 className="text-5xl md:text-[8rem] font-black mb-10 hero-text leading-[0.85] text-[#1d1d1f]">
               Ready?
             </h2>
-            <p className="text-lg text-white/30 mb-12 font-light">Your brand deserves better. Let&apos;s build something iconic.</p>
-            <Link href="#pricing" className="inline-block px-14 py-6 text-xl font-black bg-white text-black rounded-full hover:scale-105 transition-all duration-500 pulse-glow">
+            <p className="text-lg text-[#86868b] mb-12">Your brand deserves better. Let&apos;s build something iconic.</p>
+            <Link href="#pricing" className="inline-block px-14 py-6 text-xl font-black bg-[#1d1d1f] text-white rounded-full hover:scale-105 transition-all duration-500 pulse-glow">
               Get Started Now
             </Link>
           </div>
@@ -337,17 +313,17 @@ export default function Home() {
 
       {/* Footer */}
       <div className="line-fade" />
-      <footer className="py-20 px-6 md:px-12">
+      <footer className="py-20 px-6 md:px-12 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div>
-            <div className="text-lg font-bold tracking-[-0.08em] uppercase mb-2">House of Extsy</div>
-            <p className="text-white/20 text-[13px]">&copy; 2026 House of Extsy. All rights reserved.</p>
+            <div className="text-lg font-bold tracking-[-0.08em] uppercase mb-2 text-[#1d1d1f]">House of Extsy</div>
+            <p className="text-[#86868b] text-[13px]">&copy; 2026 House of Extsy. All rights reserved.</p>
           </div>
-          <div className="flex gap-8 text-[13px] text-white/25">
-            <Link href="#" className="hover:text-white transition-colors duration-300">Twitter</Link>
-            <Link href="#" className="hover:text-white transition-colors duration-300">LinkedIn</Link>
-            <Link href="#" className="hover:text-white transition-colors duration-300">Instagram</Link>
-            <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="hover:text-white transition-colors duration-300">Book a call</Link>
+          <div className="flex gap-8 text-[13px] text-[#86868b]">
+            <Link href="#" className="hover:text-[#1d1d1f] transition-colors duration-500">Twitter</Link>
+            <Link href="#" className="hover:text-[#1d1d1f] transition-colors duration-500">LinkedIn</Link>
+            <Link href="#" className="hover:text-[#1d1d1f] transition-colors duration-500">Instagram</Link>
+            <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="hover:text-[#1d1d1f] transition-colors duration-500">Book a call</Link>
           </div>
         </div>
       </footer>
