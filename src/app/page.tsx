@@ -31,13 +31,13 @@ export default function Home() {
               alt="House of Extsy"
               width={1100}
               height={1100}
-              className="w-full max-w-[900px] h-auto mb-12"
+              className="w-full max-w-[800px] h-auto mb-16"
               priority
             />
           </FadeIn>
 
           <FadeIn delay={200}>
-            <h1 className="text-5xl md:text-8xl font-black mb-8 hero-text leading-[0.9] tracking-tight text-[#1d1d1f]">
+            <h1 className="text-5xl md:text-8xl font-black mb-12 hero-text leading-[0.9] tracking-tight text-[#1d1d1f]">
               Elite branding.<br />Delivered daily.
             </h1>
           </FadeIn>
@@ -53,7 +53,7 @@ export default function Home() {
               </Link>
 
               <Link
-                href="https://wa.me/918010470077"
+                href="https://api.whatsapp.com/send?phone=918010470077"
                 target="_blank"
                 className="w-full sm:w-auto px-10 py-5 bg-white border border-black/10 text-[#1d1d1f] rounded-full font-bold text-lg hover:bg-black/5 transition-all duration-500 flex items-center justify-center gap-3"
               >
@@ -68,15 +68,15 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-6 bg-white border-t border-black/5">
-        <div className="max-w-4xl mx-auto">
+      <section id="pricing" className="py-32 px-6 bg-white border-t border-black/5">
+        <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-[#1d1d1f]">Simple, daily branding.</h2>
-              <p className="text-[#86868b] mt-2">Unlimited requests. 48h delivery.</p>
+            <div className="text-center mb-20">
+              <h2 className="text-4xl md:text-6xl font-black text-[#1d1d1f] tracking-tight">Simple, daily branding.</h2>
+              <p className="text-xl text-[#86868b] mt-4">Unlimited requests. 48h delivery.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="glass-card p-8 bg-white/40 group hover:bg-[#1d1d1f] hover:text-white transition-all duration-500">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="glass-card p-12 bg-white/40 group hover:bg-[#1d1d1f] hover:text-white transition-all duration-500 border-black/5">
                 <div className="text-xs font-black uppercase tracking-widest text-[#86868b] group-hover:text-white/60 mb-2">Standard</div>
                 <div className="text-3xl font-black text-[#1d1d1f] group-hover:text-white mb-6">$4,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/60">/mo</span></div>
                 <button className="w-full py-3 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-black rounded-full font-bold text-sm transition-all">Get Started</button>
@@ -97,7 +97,7 @@ export default function Home() {
           <div className="text-2xl font-black tracking-tight uppercase text-[#1d1d1f]">House of Extsy</div>
           <div className="flex gap-8 text-[13px] text-[#86868b]">
             <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="hover:text-[#1d1d1f] transition-colors">Book a call</Link>
-            <Link href="https://wa.me/918010470077" target="_blank" className="hover:text-[#1d1d1f] transition-colors">WhatsApp</Link>
+            <Link href="https://api.whatsapp.com/send?phone=918010470077" target="_blank" className="hover:text-[#1d1d1f] transition-colors">WhatsApp</Link>
             <span className="text-black/20">&copy; 2026 House of Extsy</span>
           </div>
         </div>
