@@ -73,19 +73,48 @@ export default function Home() {
 
   const fetchLocalization = async () => {
     try {
-      // 1. Detect Location (FreeIPAPI - No key needed)
-      const geoRes = await fetch("https://freeipapi.com/api/json");
-      const geo = await geoRes.json();
+      let countryCode = "US";
 
-      const countryCode = geo.countryCode || "US";
+      const params = new URLSearchParams(window.location.search);
+      const override = params.get("country")?.toUpperCase();
+
+      if (override) {
+        countryCode = override;
+      } else {
+        try {
+          const geoRes = await fetch("https://freeipapi.com/api/json");
+          if (geoRes.ok) {
+            const geo = await geoRes.json();
+            countryCode = geo.countryCode || "US";
+          } else {
+            throw new Error("FreeIPAPI failed");
+          }
+        } catch (err) {
+          try {
+            const backupRes = await fetch("https://ipapi.co/json/");
+            if (backupRes.ok) {
+              const backupGeo = await backupRes.json();
+              countryCode = backupGeo.country_code || "US";
+            }
+          } catch (backupErr) {
+            // Default to US
+          }
+        }
+      }
+
       const isIndia = countryCode === "IN";
-
-      // 2. Fetch Exchange Rate (Open-ERAPI - No key needed)
-      const rateRes = await fetch("https://open.er-api.com/v6/latest/USD");
-      const rateData = await rateRes.json();
-
       const localCurrency = isIndia ? "INR" : "USD";
-      const rate = rateData.rates[localCurrency] || 1;
+
+      let rate = 1;
+      try {
+        const rateRes = await fetch("https://open.er-api.com/v6/latest/USD");
+        if (rateRes.ok) {
+          const rateData = await rateRes.json();
+          rate = rateData.rates[localCurrency] || 1;
+        }
+      } catch (err) {
+        if (isIndia) rate = 83;
+      }
 
       setGeoData({
         countryCode,
@@ -93,9 +122,8 @@ export default function Home() {
         symbol: isIndia ? "₹" : "$"
       });
       setExchangeRate(rate);
+
     } catch (err) {
-      console.error("Localization failed:", err);
-      // Fallback to USD
       setGeoData({ countryCode: "US", currency: "USD", symbol: "$" });
       setExchangeRate(1);
     } finally {
@@ -120,23 +148,21 @@ export default function Home() {
   const handlePayment = (planName: string, usdPrice: number) => {
     const { amount, currency } = getPriceData(usdPrice);
 
-    console.log(`Initiating ${currency} payment for:`, planName, amount);
-
     if (typeof window === "undefined" || !window.Razorpay) {
-      alert("Razorpay SDK not loaded. Please try again later.");
+      alert("Razorpay SDK not loaded. Try refreshing.");
       return;
     }
 
     const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
 
-    if (!keyId) {
-      alert("Razorpay Key ID is not configured.");
+    if (!keyId || keyId === "rzp_test_placeholder") {
+      alert("Razorpay Key ID missing in .env.local");
       return;
     }
 
     const options = {
       key: keyId,
-      amount: amount * 100, // amount in paisa/cents
+      amount: amount * 100,
       currency: currency,
       name: "House of Extsy",
       description: `${planName} Subscription`,
@@ -149,13 +175,15 @@ export default function Home() {
         email: "",
         contact: "",
       },
-      theme: {
-        color: "#1d1d1f",
-      },
+      theme: { color: "#1d1d1f" },
     };
 
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+    try {
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      console.error("Razorpay error:", err);
+    }
   };
 
   return (
@@ -225,29 +253,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Section - Dynamic Localization */}
+      {/* Pricing Section */}
       <section id="pricing" className="py-40 px-6 bg-white border-t border-black/5">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-24">
               <h2 className="text-5xl md:text-7xl font-black text-[#1d1d1f] tracking-tight mb-8">Scale with AI.</h2>
               <p className="text-xl md:text-2xl text-[#86868b] max-w-3xl mx-auto leading-relaxed">
-                We build systems, automate workflows, and drive long-term performance. Outcome-driven partnerships for global brands.
+                We build systems, automate workflows, and drive long-term performance.
               </p>
-              {geoData?.countryCode === "IN" && (
-                <div className="mt-6 inline-flex items-center gap-2 px-4 py-1.5 bg-[#1d1d1f]/[0.03] rounded-full text-[11px] font-bold text-[#1d1d1f] uppercase tracking-wider">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                  </span>
-                  PPP Pricing Active for India
-                </div>
-              )}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {PLANS.map((plan, idx) => {
-                const { amount, symbol } = getPriceData(plan.usdPrice);
+                const priceData = getPriceData(plan.usdPrice);
                 return (
                   <div key={plan.id} className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-white hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 border-black/5 cursor-default relative overflow-hidden">
                     {plan.popular && (
@@ -261,7 +280,7 @@ export default function Home() {
                           <span className="opacity-20 animate-pulse">---</span>
                         ) : (
                           <>
-                            {symbol}{amount.toLocaleString()}
+                            {priceData.symbol}{priceData.amount.toLocaleString()}
                             <span className="text-sm font-medium text-[#86868b] ml-1">/mo</span>
                           </>
                         )}
