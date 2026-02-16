@@ -11,7 +11,7 @@ export default function Home() {
           <Image src="/extsy-e-logo.png" alt="House of Extsy" width={80} height={80} className="h-12 w-auto" />
         </Link>
         <div className="flex items-center gap-6">
-          <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="hidden md:block text-[13px] font-medium text-[#86868b] hover:text-[#1d1d1f] transition-colors duration-500">
+          <Link href="https://calendly.com/extsystudios/30min" target="_blank" className="hidden md:block text-[13px] font-medium text-[#86868b] hover:text-[#1d1d1f] transition-colors duration-500">
             Book a call
           </Link>
           <Link href="#pricing" className="px-6 py-2.5 text-[13px] font-semibold bg-[#1d1d1f] text-white rounded-full hover:bg-black transition-all duration-500 hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)]">
@@ -45,7 +45,7 @@ export default function Home() {
           <FadeIn delay={400}>
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <Link
-                href="https://calendly.com/houseofextsy/discovery"
+                href="https://calendly.com/extsystudios/30min"
                 target="_blank"
                 className="w-full sm:w-auto px-10 py-5 bg-[#1d1d1f] text-white rounded-full font-bold text-lg hover:scale-105 transition-all duration-500 shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
               >
@@ -96,7 +96,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-2xl font-black tracking-tight uppercase text-[#1d1d1f]">House of Extsy</div>
           <div className="flex gap-8 text-[13px] text-[#86868b]">
-            <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="hover:text-[#1d1d1f] transition-colors">Book a call</Link>
+            <Link href="https://calendly.com/extsystudios/30min" target="_blank" className="hover:text-[#1d1d1f] transition-colors">Book a call</Link>
             <Link href="https://api.whatsapp.com/send?phone=918010470077" target="_blank" className="hover:text-[#1d1d1f] transition-colors">WhatsApp</Link>
             <span className="text-black/20">&copy; 2026 House of Extsy</span>
           </div>
