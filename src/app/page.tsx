@@ -11,51 +11,51 @@ declare global {
   }
 }
 
-// Plan Configuration
+// Plan Configuration - Focused on "Building" & "AI"
 const PLANS = [
   {
-    id: "growth-care",
-    name: "Growth Care",
+    id: "mvp-build",
+    name: "AI MVP Build",
     usdPrice: 3495,
-    description: "Continuous optimization for established digital ecosystems.",
+    description: "Rapidly build and launch your AI-first product.",
     features: [
-      "Website & app maintenance",
-      "Speed & performance optimization",
-      "Conversion rate improvements",
-      "AI chatbot refinement",
-      "1 landing page per month",
-      "Monthly performance reports"
+      "Custom AI feature development",
+      "Full-stack product building",
+      "UI/UX for AI interfaces",
+      "API & LLM integrations",
+      "1 product launch per month",
+      "Cloud infrastructure setup"
     ]
   },
   {
-    id: "ai-automation",
-    name: "AI Automation",
+    id: "ai-engineering",
+    name: "AI Engineering",
     usdPrice: 5495,
-    description: "Revenue automation partnership via AI-first systems.",
+    description: "Your dedicated AI engineering & automation partner.",
     popular: true,
     features: [
-      "Everything in Growth Care",
-      "CRM & sales funnel automation",
-      "AI lead qualification bot",
-      "Email & messaging automation",
-      "Pipeline optimization",
-      "2 landing pages per month",
-      "Monthly strategy calls"
+      "Everything in MVP Build",
+      "Deep workflow automation",
+      "Custom RAG & Vector setups",
+      "Fine-tuning & model optimization",
+      "Direct technical architect access",
+      "Weekly build sprints",
+      "Enterprise security audits"
     ]
   },
   {
-    id: "product-scale",
-    name: "Product & Scale",
+    id: "scale-ops",
+    name: "Scale & Ops",
     usdPrice: 8995,
-    description: "Dedicated development partnership for product evolution.",
+    description: "Full-scale product evolution and infrastructure scaling.",
     features: [
-      "Dedicated monthly capacity",
-      "Ongoing feature development",
-      "AI product enhancements",
-      "Enterprise UI/UX improvements",
-      "API & infrastructure scaling",
-      "Technical advisory board",
-      "Direct executive communication"
+      "Dedicated build team of 3+",
+      "High-scale AI infrastructure",
+      "Legacy system AI migration",
+      "Advanced 24/7 reliability",
+      "Unlimited technical advisory",
+      "Strategic CTO-level partner",
+      "Product-market fit scaling"
     ]
   }
 ];
@@ -224,7 +224,7 @@ export default function Home() {
 
           <FadeIn delay={200}>
             <h1 className="text-5xl md:text-8xl font-black mb-12 hero-text leading-[0.85] tracking-tight text-[#1d1d1f]">
-              Elite branding.<br />Delivered daily.
+              Build faster.<br />With AI engine.
             </h1>
           </FadeIn>
 
@@ -258,9 +258,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-24">
-              <h2 className="text-5xl md:text-7xl font-black text-[#1d1d1f] tracking-tight mb-8">Scale with AI.</h2>
+              <h2 className="text-5xl md:text-7xl font-black text-[#1d1d1f] tracking-tight mb-8">Built with AI.</h2>
               <p className="text-xl md:text-2xl text-[#86868b] max-w-3xl mx-auto leading-relaxed">
-                We build systems, automate workflows, and drive long-term performance.
+                Premium product builds, delivered in weekly sprints. Your AI engineering partner.
               </p>
             </div>
 
@@ -304,7 +304,7 @@ export default function Home() {
                       disabled={loadingPricing}
                       className="w-full py-4 bg-[#1d1d1f] text-white rounded-full font-bold text-base hover:bg-black hover:scale-[1.02] transition-all duration-300 active:scale-[0.98] shadow-lg disabled:opacity-50"
                     >
-                      {plan.id === "product-scale" ? "Retain Capacity" : plan.id === "ai-automation" ? "Automate Revenue" : "Start Optimization"}
+                      Subscribe
                     </button>
                   </div>
                 );
