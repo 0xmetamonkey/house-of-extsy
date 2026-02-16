@@ -11,43 +11,138 @@ declare global {
   }
 }
 
+// Plan Configuration
+const PLANS = [
+  {
+    id: "growth-care",
+    name: "Growth Care",
+    usdPrice: 3495,
+    description: "Continuous optimization for established digital ecosystems.",
+    features: [
+      "Website & app maintenance",
+      "Speed & performance optimization",
+      "Conversion rate improvements",
+      "AI chatbot refinement",
+      "1 landing page per month",
+      "Monthly performance reports"
+    ]
+  },
+  {
+    id: "ai-automation",
+    name: "AI Automation",
+    usdPrice: 5495,
+    description: "Revenue automation partnership via AI-first systems.",
+    popular: true,
+    features: [
+      "Everything in Growth Care",
+      "CRM & sales funnel automation",
+      "AI lead qualification bot",
+      "Email & messaging automation",
+      "Pipeline optimization",
+      "2 landing pages per month",
+      "Monthly strategy calls"
+    ]
+  },
+  {
+    id: "product-scale",
+    name: "Product & Scale",
+    usdPrice: 8995,
+    description: "Dedicated development partnership for product evolution.",
+    features: [
+      "Dedicated monthly capacity",
+      "Ongoing feature development",
+      "AI product enhancements",
+      "Enterprise UI/UX improvements",
+      "API & infrastructure scaling",
+      "Technical advisory board",
+      "Direct executive communication"
+    ]
+  }
+];
+
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [geoData, setGeoData] = useState<{ countryCode: string; currency: string; symbol: string } | null>(null);
+  const [exchangeRate, setExchangeRate] = useState<number>(1);
+  const [loadingPricing, setLoadingPricing] = useState(true);
 
   useEffect(() => {
     setMounted(true);
+    fetchLocalization();
   }, []);
 
-  const handlePayment = (planName: string, amount: number) => {
-    console.log("Initiating payment for:", planName, amount);
+  const fetchLocalization = async () => {
+    try {
+      // 1. Detect Location (FreeIPAPI - No key needed)
+      const geoRes = await fetch("https://freeipapi.com/api/json");
+      const geo = await geoRes.json();
+
+      const countryCode = geo.countryCode || "US";
+      const isIndia = countryCode === "IN";
+
+      // 2. Fetch Exchange Rate (Open-ERAPI - No key needed)
+      const rateRes = await fetch("https://open.er-api.com/v6/latest/USD");
+      const rateData = await rateRes.json();
+
+      const localCurrency = isIndia ? "INR" : "USD";
+      const rate = rateData.rates[localCurrency] || 1;
+
+      setGeoData({
+        countryCode,
+        currency: localCurrency,
+        symbol: isIndia ? "₹" : "$"
+      });
+      setExchangeRate(rate);
+    } catch (err) {
+      console.error("Localization failed:", err);
+      // Fallback to USD
+      setGeoData({ countryCode: "US", currency: "USD", symbol: "$" });
+      setExchangeRate(1);
+    } finally {
+      setLoadingPricing(false);
+    }
+  };
+
+  const getPriceData = (usdPrice: number) => {
+    const isIndia = geoData?.countryCode === "IN";
+    const pppMultiplier = isIndia ? 0.4 : 1.0;
+
+    const adjustedUsd = usdPrice * pppMultiplier;
+    const finalAmount = Math.round(adjustedUsd * exchangeRate);
+
+    return {
+      amount: finalAmount,
+      currency: geoData?.currency || "USD",
+      symbol: geoData?.symbol || "$"
+    };
+  };
+
+  const handlePayment = (planName: string, usdPrice: number) => {
+    const { amount, currency } = getPriceData(usdPrice);
+
+    console.log(`Initiating ${currency} payment for:`, planName, amount);
 
     if (typeof window === "undefined" || !window.Razorpay) {
-      console.error("Razorpay SDK not found on window");
       alert("Razorpay SDK not loaded. Please try again later.");
       return;
     }
 
     const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
 
-    if (!keyId || keyId === "rzp_test_placeholder") {
-      alert("Razorpay Key ID is not configured correctly in .env.local");
+    if (!keyId) {
+      alert("Razorpay Key ID is not configured.");
       return;
     }
 
     const options = {
       key: keyId,
-      amount: amount * 100,
-      currency: "USD",
+      amount: amount * 100, // amount in paisa/cents
+      currency: currency,
       name: "House of Extsy",
       description: `${planName} Subscription`,
       image: "/extsy-e-logo.png",
       handler: function (response: any) {
         alert("Payment Successful! ID: " + response.razorpay_payment_id);
-      },
-      modal: {
-        ondismiss: function () {
-          console.log("Checkout modal closed");
-        }
       },
       prefill: {
         name: "",
@@ -59,13 +154,8 @@ export default function Home() {
       },
     };
 
-    try {
-      const rzp = new window.Razorpay(options);
-      rzp.open();
-    } catch (err) {
-      console.error("Error opening Razorpay modal:", err);
-      alert("Could not open payment window. Check console for details.");
-    }
+    const rzp = new window.Razorpay(options);
+    rzp.open();
   };
 
   return (
@@ -135,125 +225,71 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Section - Outcome Driven Service Model */}
+      {/* Pricing Section - Dynamic Localization */}
       <section id="pricing" className="py-40 px-6 bg-white border-t border-black/5">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-24">
               <h2 className="text-5xl md:text-7xl font-black text-[#1d1d1f] tracking-tight mb-8">Scale with AI.</h2>
               <p className="text-xl md:text-2xl text-[#86868b] max-w-3xl mx-auto leading-relaxed">
-                We don't sell hours. We build systems, automate workflows, and drive long-term digital performance. Choose your partnership.
+                We build systems, automate workflows, and drive long-term performance. Outcome-driven partnerships for global brands.
               </p>
+              {geoData?.countryCode === "IN" && (
+                <div className="mt-6 inline-flex items-center gap-2 px-4 py-1.5 bg-[#1d1d1f]/[0.03] rounded-full text-[11px] font-bold text-[#1d1d1f] uppercase tracking-wider">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                  PPP Pricing Active for India
+                </div>
+              )}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Plan 1: Growth Care */}
-              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-white hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 border-black/5 cursor-default">
-                <div className="mb-10">
-                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] mb-3">Plan 01</div>
-                  <h3 className="text-2xl font-black text-[#1d1d1f] mb-2">Growth Care</h3>
-                  <div className="text-3xl font-black text-[#1d1d1f] mb-6 tracking-tight">$3,495<span className="text-sm font-medium text-[#86868b] ml-1">/mo</span></div>
-                  <p className="text-sm text-[#86868b] leading-relaxed">Continuous optimization for established digital ecosystems.</p>
-                </div>
+              {PLANS.map((plan, idx) => {
+                const { amount, symbol } = getPriceData(plan.usdPrice);
+                return (
+                  <div key={plan.id} className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-white hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 border-black/5 cursor-default relative overflow-hidden">
+                    {plan.popular && (
+                      <div className="absolute top-6 right-6 px-3 py-1 bg-black/[0.05] rounded-full text-[9px] font-black uppercase tracking-widest text-[#1d1d1f]">Most Popular</div>
+                    )}
+                    <div className="mb-10">
+                      <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] mb-3">Plan 0{idx + 1}</div>
+                      <h3 className="text-2xl font-black text-[#1d1d1f] mb-2">{plan.name}</h3>
+                      <div className="text-4xl font-black text-[#1d1d1f] mb-6 tracking-tight">
+                        {loadingPricing ? (
+                          <span className="opacity-20 animate-pulse">---</span>
+                        ) : (
+                          <>
+                            {symbol}{amount.toLocaleString()}
+                            <span className="text-sm font-medium text-[#86868b] ml-1">/mo</span>
+                          </>
+                        )}
+                      </div>
+                      <p className="text-sm text-[#86868b] leading-relaxed">{plan.description}</p>
+                    </div>
 
-                <ul className="flex-grow space-y-4 mb-10">
-                  {[
-                    "Website & app maintenance",
-                    "Speed & performance optimization",
-                    "Conversion rate improvements",
-                    "AI chatbot refinement",
-                    "1 landing page per month",
-                    "Monthly performance reports"
-                  ].map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70">
-                      <svg className="w-4 h-4 text-black mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                    <ul className="flex-grow space-y-4 mb-10">
+                      {plan.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70">
+                          <svg className="w-4 h-4 text-black mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
 
-                <button
-                  onClick={() => handlePayment("Growth Care", 3495)}
-                  className="w-full py-4 bg-[#1d1d1f] text-white rounded-full font-bold text-base hover:bg-black hover:scale-[1.02] transition-all duration-300 active:scale-[0.98] shadow-lg"
-                >
-                  Start Optimization
-                </button>
-              </div>
-
-              {/* Plan 2: AI Automation Partner */}
-              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-white hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 border-black/5 relative overflow-hidden cursor-default">
-                <div className="absolute top-6 right-6 px-3 py-1 bg-black/[0.05] rounded-full text-[9px] font-black uppercase tracking-widest text-[#1d1d1f]">Most Popular</div>
-                <div className="mb-10">
-                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] mb-3">Plan 02</div>
-                  <h3 className="text-2xl font-black text-[#1d1d1f] mb-2">AI Automation</h3>
-                  <div className="text-3xl font-black text-[#1d1d1f] mb-6 tracking-tight">$5,495<span className="text-sm font-medium text-[#86868b] ml-1">/mo</span></div>
-                  <p className="text-sm text-[#86868b] leading-relaxed">Revenue automation partnership via AI-first systems.</p>
-                </div>
-
-                <ul className="flex-grow space-y-4 mb-10">
-                  {[
-                    "Everything in Growth Care",
-                    "CRM & sales funnel automation",
-                    "AI lead qualification bot",
-                    "Email & messaging automation",
-                    "Pipeline optimization",
-                    "2 landing pages per month",
-                    "Monthly strategy calls"
-                  ].map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70">
-                      <svg className="w-4 h-4 text-black mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  onClick={() => handlePayment("AI Automation", 5495)}
-                  className="w-full py-4 bg-[#1d1d1f] text-white rounded-full font-bold text-base hover:bg-black hover:scale-[1.02] transition-all duration-300 active:scale-[0.98] shadow-lg"
-                >
-                  Automate Revenue
-                </button>
-              </div>
-
-              {/* Plan 3: Product & Scale Retainer */}
-              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-white hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 border-black/5 cursor-default">
-                <div className="mb-10">
-                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] mb-3">Plan 03</div>
-                  <h3 className="text-2xl font-black text-[#1d1d1f] mb-2">Product & Scale</h3>
-                  <div className="text-3xl font-black text-[#1d1d1f] mb-6 tracking-tight">$8,995<span className="text-sm font-medium text-[#86868b] ml-1">/mo</span></div>
-                  <p className="text-sm text-[#86868b] leading-relaxed">Dedicated development partnership for product evolution.</p>
-                </div>
-
-                <ul className="flex-grow space-y-4 mb-10">
-                  {[
-                    "Dedicated monthly capacity",
-                    "Ongoing feature development",
-                    "AI product enhancements",
-                    "Enterprise UI/UX improvements",
-                    "API & infrastructure scaling",
-                    "Technical advisory board",
-                    "Direct executive communication"
-                  ].map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70">
-                      <svg className="w-4 h-4 text-black mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  onClick={() => handlePayment("Product & Scale", 8995)}
-                  className="w-full py-4 bg-[#1d1d1f] text-white rounded-full font-bold text-base hover:bg-black hover:scale-[1.02] transition-all duration-300 active:scale-[0.98] shadow-lg"
-                >
-                  Retain Capacity
-                </button>
-              </div>
+                    <button
+                      onClick={() => handlePayment(plan.name, plan.usdPrice)}
+                      disabled={loadingPricing}
+                      className="w-full py-4 bg-[#1d1d1f] text-white rounded-full font-bold text-base hover:bg-black hover:scale-[1.02] transition-all duration-300 active:scale-[0.98] shadow-lg disabled:opacity-50"
+                    >
+                      {plan.id === "product-scale" ? "Retain Capacity" : plan.id === "ai-automation" ? "Automate Revenue" : "Start Optimization"}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           </FadeIn>
         </div>
