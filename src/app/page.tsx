@@ -8,7 +8,7 @@ export default function Home() {
       {/* Navbar */}
       <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-8 py-4 glass-card w-[90%] max-w-7xl border-white/20">
         <Link href="/">
-          <Image src="/extsy-e-logo.png" alt="House of Extsy" width={60} height={60} className="h-10 w-auto" />
+          <Image src="/extsy-e-logo.png" alt="House of Extsy" width={80} height={80} className="h-12 w-auto" />
         </Link>
         <div className="flex items-center gap-6">
           <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="hidden md:block text-[13px] font-medium text-[#86868b] hover:text-[#1d1d1f] transition-colors duration-500">
