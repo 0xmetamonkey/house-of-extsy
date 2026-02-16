@@ -80,7 +80,7 @@ export default function Home() {
             Book a call
           </Link>
           <Link href="#pricing" className="px-6 py-2.5 text-[13px] font-semibold bg-[#1d1d1f] text-white rounded-full hover:bg-black transition-all duration-500 hover:shadow-[0_8px_20px_rgba(0,0,0,0.2)] active:scale-95">
-            Explore Pricing
+            View Plans
           </Link>
         </div>
       </nav>
@@ -135,37 +135,123 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Pricing Section - Outcome Driven Service Model */}
       <section id="pricing" className="py-40 px-6 bg-white border-t border-black/5">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-24">
-              <h2 className="text-5xl md:text-7xl font-black text-[#1d1d1f] tracking-tight mb-6">Simple, daily branding.</h2>
-              <p className="text-xl md:text-2xl text-[#86868b] max-w-2xl mx-auto">Unlimited requests. Two-day delivery. One flat monthly rate.</p>
+              <h2 className="text-5xl md:text-7xl font-black text-[#1d1d1f] tracking-tight mb-8">Scale with AI.</h2>
+              <p className="text-xl md:text-2xl text-[#86868b] max-w-3xl mx-auto leading-relaxed">
+                We don't sell hours. We build systems, automate workflows, and drive long-term digital performance. Choose your partnership.
+              </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {/* Standard Plan */}
-              <div className="glass-card p-14 bg-white/40 group hover:bg-[#1d1d1f] hover:shadow-[0_40px_80px_rgba(0,0,0,0.15)] transition-all duration-700 border-black/5">
-                <div className="text-xs font-black uppercase tracking-[0.2em] text-[#86868b] group-hover:text-white/40 mb-3 transition-colors duration-500">Standard</div>
-                <div className="text-5xl font-black text-[#1d1d1f] group-hover:text-white mb-10 transition-colors duration-500 tracking-tight">$4,995<span className="text-base font-medium text-[#86868b] group-hover:text-white/40 ml-2">/mo</span></div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Plan 1: Growth Care */}
+              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-[#1d1d1f] hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] transition-all duration-500 border-black/5">
+                <div className="mb-10">
+                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] group-hover:text-white/40 mb-3 transition-colors duration-500">Plan 01</div>
+                  <h3 className="text-2xl font-black text-[#1d1d1f] group-hover:text-white mb-2 transition-colors duration-500">Growth Care</h3>
+                  <div className="text-3xl font-black text-[#1d1d1f] group-hover:text-white mb-6 transition-colors duration-500 tracking-tight">$3,495<span className="text-sm font-medium text-[#86868b] group-hover:text-white/40 ml-1">/mo</span></div>
+                  <p className="text-sm text-[#86868b] group-hover:text-white/60 leading-relaxed transition-colors duration-500">Continuous optimization for established digital ecosystems.</p>
+                </div>
+
+                <ul className="flex-grow space-y-4 mb-10">
+                  {[
+                    "Website & app maintenance",
+                    "Speed & performance optimization",
+                    "Conversion rate improvements",
+                    "AI chatbot refinement",
+                    "1 landing page per month",
+                    "Monthly performance reports"
+                  ].map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70 group-hover:text-white/80 transition-colors duration-500">
+                      <svg className="w-4 h-4 text-black group-hover:text-white mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
                 <button
-                  onClick={() => handlePayment("Standard", 4995)}
-                  className="w-full py-5 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-lg transition-all duration-500 active:scale-[0.98] shadow-xl hover:shadow-2xl"
+                  onClick={() => handlePayment("Growth Care", 3495)}
+                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all duration-500 active:scale-[0.98] shadow-lg"
                 >
-                  Get Started
+                  Start Optimization
                 </button>
               </div>
 
-              {/* Pro Plan */}
-              <div className="glass-card p-14 bg-[#1d1d1f]/[0.02] border-black/10 group hover:bg-[#1d1d1f] hover:shadow-[0_40px_80px_rgba(0,0,0,0.15)] transition-all duration-700 overflow-hidden relative">
-                <div className="absolute top-6 right-6 px-4 py-1.5 bg-black/[0.05] group-hover:bg-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-[#1d1d1f] group-hover:text-white transition-colors duration-500">Popular</div>
-                <div className="text-xs font-black uppercase tracking-[0.2em] text-[#86868b] group-hover:text-white/40 mb-3 transition-colors duration-500">Pro</div>
-                <div className="text-5xl font-black text-[#1d1d1f] group-hover:text-white mb-10 transition-colors duration-500 tracking-tight">$6,995<span className="text-base font-medium text-[#86868b] group-hover:text-white/40 ml-2">/mo</span></div>
+              {/* Plan 2: AI Automation Partner */}
+              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-[#1d1d1f] hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] transition-all duration-500 border-black/5 relative overflow-hidden">
+                <div className="absolute top-6 right-6 px-3 py-1 bg-black/[0.05] group-hover:bg-white/10 rounded-full text-[9px] font-black uppercase tracking-widest text-[#1d1d1f] group-hover:text-white transition-colors duration-500">Most Popular</div>
+                <div className="mb-10">
+                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] group-hover:text-white/40 mb-3 transition-colors duration-500">Plan 02</div>
+                  <h3 className="text-2xl font-black text-[#1d1d1f] group-hover:text-white mb-2 transition-colors duration-500">AI Automation</h3>
+                  <div className="text-3xl font-black text-[#1d1d1f] group-hover:text-white mb-6 transition-colors duration-500 tracking-tight">$5,495<span className="text-sm font-medium text-[#86868b] group-hover:text-white/40 ml-1">/mo</span></div>
+                  <p className="text-sm text-[#86868b] group-hover:text-white/60 leading-relaxed transition-colors duration-500">Revenue automation partnership via AI-first systems.</p>
+                </div>
+
+                <ul className="flex-grow space-y-4 mb-10">
+                  {[
+                    "Everything in Growth Care",
+                    "CRM & sales funnel automation",
+                    "AI lead qualification bot",
+                    "Email & messaging automation",
+                    "Pipeline optimization",
+                    "2 landing pages per month",
+                    "Monthly strategy calls"
+                  ].map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70 group-hover:text-white/80 transition-colors duration-500">
+                      <svg className="w-4 h-4 text-black group-hover:text-white mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
                 <button
-                  onClick={() => handlePayment("Pro", 6995)}
-                  className="w-full py-5 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-lg transition-all duration-500 active:scale-[0.98] shadow-xl hover:shadow-2xl"
+                  onClick={() => handlePayment("AI Automation", 5495)}
+                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all duration-500 active:scale-[0.98] shadow-lg"
                 >
-                  Get Started
+                  Automate Revenue
+                </button>
+              </div>
+
+              {/* Plan 3: Product & Scale Retainer */}
+              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-[#1d1d1f] hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] transition-all duration-500 border-black/5">
+                <div className="mb-10">
+                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] group-hover:text-white/40 mb-3 transition-colors duration-500">Plan 03</div>
+                  <h3 className="text-2xl font-black text-[#1d1d1f] group-hover:text-white mb-2 transition-colors duration-500">Product & Scale</h3>
+                  <div className="text-3xl font-black text-[#1d1d1f] group-hover:text-white mb-6 transition-colors duration-500 tracking-tight">$8,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/40 ml-1">/mo</span></div>
+                  <p className="text-sm text-[#86868b] group-hover:text-white/60 leading-relaxed transition-colors duration-500">Dedicated development partnership for product evolution.</p>
+                </div>
+
+                <ul className="flex-grow space-y-4 mb-10">
+                  {[
+                    "Dedicated monthly capacity",
+                    "Ongoing feature development",
+                    "AI product enhancements",
+                    "Enterprise UI/UX improvements",
+                    "API & infrastructure scaling",
+                    "Technical advisory board",
+                    "Direct executive communication"
+                  ].map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70 group-hover:text-white/80 transition-colors duration-500">
+                      <svg className="w-4 h-4 text-black group-hover:text-white mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  onClick={() => handlePayment("Product & Scale", 8995)}
+                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all duration-500 active:scale-[0.98] shadow-lg"
+                >
+                  Retain Capacity
                 </button>
               </div>
             </div>
