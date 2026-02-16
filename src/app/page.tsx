@@ -148,12 +148,12 @@ export default function Home() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Plan 1: Growth Care */}
-              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-[#1d1d1f] hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] transition-all duration-500 border-black/5">
+              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-white hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 border-black/5 cursor-default">
                 <div className="mb-10">
-                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] group-hover:text-white/40 mb-3 transition-colors duration-500">Plan 01</div>
-                  <h3 className="text-2xl font-black text-[#1d1d1f] group-hover:text-white mb-2 transition-colors duration-500">Growth Care</h3>
-                  <div className="text-3xl font-black text-[#1d1d1f] group-hover:text-white mb-6 transition-colors duration-500 tracking-tight">$3,495<span className="text-sm font-medium text-[#86868b] group-hover:text-white/40 ml-1">/mo</span></div>
-                  <p className="text-sm text-[#86868b] group-hover:text-white/60 leading-relaxed transition-colors duration-500">Continuous optimization for established digital ecosystems.</p>
+                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] mb-3">Plan 01</div>
+                  <h3 className="text-2xl font-black text-[#1d1d1f] mb-2">Growth Care</h3>
+                  <div className="text-3xl font-black text-[#1d1d1f] mb-6 tracking-tight">$3,495<span className="text-sm font-medium text-[#86868b] ml-1">/mo</span></div>
+                  <p className="text-sm text-[#86868b] leading-relaxed">Continuous optimization for established digital ecosystems.</p>
                 </div>
 
                 <ul className="flex-grow space-y-4 mb-10">
@@ -165,8 +165,8 @@ export default function Home() {
                     "1 landing page per month",
                     "Monthly performance reports"
                   ].map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70 group-hover:text-white/80 transition-colors duration-500">
-                      <svg className="w-4 h-4 text-black group-hover:text-white mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70">
+                      <svg className="w-4 h-4 text-black mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                       {feature}
@@ -176,20 +176,20 @@ export default function Home() {
 
                 <button
                   onClick={() => handlePayment("Growth Care", 3495)}
-                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all duration-500 active:scale-[0.98] shadow-lg"
+                  className="w-full py-4 bg-[#1d1d1f] text-white rounded-full font-bold text-base hover:bg-black hover:scale-[1.02] transition-all duration-300 active:scale-[0.98] shadow-lg"
                 >
                   Start Optimization
                 </button>
               </div>
 
               {/* Plan 2: AI Automation Partner */}
-              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-[#1d1d1f] hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] transition-all duration-500 border-black/5 relative overflow-hidden">
-                <div className="absolute top-6 right-6 px-3 py-1 bg-black/[0.05] group-hover:bg-white/10 rounded-full text-[9px] font-black uppercase tracking-widest text-[#1d1d1f] group-hover:text-white transition-colors duration-500">Most Popular</div>
+              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-white hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 border-black/5 relative overflow-hidden cursor-default">
+                <div className="absolute top-6 right-6 px-3 py-1 bg-black/[0.05] rounded-full text-[9px] font-black uppercase tracking-widest text-[#1d1d1f]">Most Popular</div>
                 <div className="mb-10">
-                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] group-hover:text-white/40 mb-3 transition-colors duration-500">Plan 02</div>
-                  <h3 className="text-2xl font-black text-[#1d1d1f] group-hover:text-white mb-2 transition-colors duration-500">AI Automation</h3>
-                  <div className="text-3xl font-black text-[#1d1d1f] group-hover:text-white mb-6 transition-colors duration-500 tracking-tight">$5,495<span className="text-sm font-medium text-[#86868b] group-hover:text-white/40 ml-1">/mo</span></div>
-                  <p className="text-sm text-[#86868b] group-hover:text-white/60 leading-relaxed transition-colors duration-500">Revenue automation partnership via AI-first systems.</p>
+                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] mb-3">Plan 02</div>
+                  <h3 className="text-2xl font-black text-[#1d1d1f] mb-2">AI Automation</h3>
+                  <div className="text-3xl font-black text-[#1d1d1f] mb-6 tracking-tight">$5,495<span className="text-sm font-medium text-[#86868b] ml-1">/mo</span></div>
+                  <p className="text-sm text-[#86868b] leading-relaxed">Revenue automation partnership via AI-first systems.</p>
                 </div>
 
                 <ul className="flex-grow space-y-4 mb-10">
@@ -202,8 +202,8 @@ export default function Home() {
                     "2 landing pages per month",
                     "Monthly strategy calls"
                   ].map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70 group-hover:text-white/80 transition-colors duration-500">
-                      <svg className="w-4 h-4 text-black group-hover:text-white mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70">
+                      <svg className="w-4 h-4 text-black mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                       {feature}
@@ -213,19 +213,19 @@ export default function Home() {
 
                 <button
                   onClick={() => handlePayment("AI Automation", 5495)}
-                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all duration-500 active:scale-[0.98] shadow-lg"
+                  className="w-full py-4 bg-[#1d1d1f] text-white rounded-full font-bold text-base hover:bg-black hover:scale-[1.02] transition-all duration-300 active:scale-[0.98] shadow-lg"
                 >
                   Automate Revenue
                 </button>
               </div>
 
               {/* Plan 3: Product & Scale Retainer */}
-              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-[#1d1d1f] hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] transition-all duration-500 border-black/5">
+              <div className="glass-card flex flex-col p-10 bg-white/40 group hover:bg-white hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 border-black/5 cursor-default">
                 <div className="mb-10">
-                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] group-hover:text-white/40 mb-3 transition-colors duration-500">Plan 03</div>
-                  <h3 className="text-2xl font-black text-[#1d1d1f] group-hover:text-white mb-2 transition-colors duration-500">Product & Scale</h3>
-                  <div className="text-3xl font-black text-[#1d1d1f] group-hover:text-white mb-6 transition-colors duration-500 tracking-tight">$8,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/40 ml-1">/mo</span></div>
-                  <p className="text-sm text-[#86868b] group-hover:text-white/60 leading-relaxed transition-colors duration-500">Dedicated development partnership for product evolution.</p>
+                  <div className="text-[10px] font-black uppercase tracking-[0.25em] text-[#86868b] mb-3">Plan 03</div>
+                  <h3 className="text-2xl font-black text-[#1d1d1f] mb-2">Product & Scale</h3>
+                  <div className="text-3xl font-black text-[#1d1d1f] mb-6 tracking-tight">$8,995<span className="text-sm font-medium text-[#86868b] ml-1">/mo</span></div>
+                  <p className="text-sm text-[#86868b] leading-relaxed">Dedicated development partnership for product evolution.</p>
                 </div>
 
                 <ul className="flex-grow space-y-4 mb-10">
@@ -238,8 +238,8 @@ export default function Home() {
                     "Technical advisory board",
                     "Direct executive communication"
                   ].map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70 group-hover:text-white/80 transition-colors duration-500">
-                      <svg className="w-4 h-4 text-black group-hover:text-white mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[#1d1d1f]/70">
+                      <svg className="w-4 h-4 text-black mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                       {feature}
@@ -249,7 +249,7 @@ export default function Home() {
 
                 <button
                   onClick={() => handlePayment("Product & Scale", 8995)}
-                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all duration-500 active:scale-[0.98] shadow-lg"
+                  className="w-full py-4 bg-[#1d1d1f] text-white rounded-full font-bold text-base hover:bg-black hover:scale-[1.02] transition-all duration-300 active:scale-[0.98] shadow-lg"
                 >
                   Retain Capacity
                 </button>
