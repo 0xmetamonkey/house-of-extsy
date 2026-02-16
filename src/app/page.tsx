@@ -19,20 +19,37 @@ export default function Home() {
   }, []);
 
   const handlePayment = (planName: string, amount: number) => {
+    console.log("Initiating payment for:", planName, amount);
+
     if (typeof window === "undefined" || !window.Razorpay) {
+      console.error("Razorpay SDK not found on window");
       alert("Razorpay SDK not loaded. Please try again later.");
       return;
     }
 
+    const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+    console.log("Using Key ID:", keyId);
+
+    if (!keyId || keyId === "rzp_test_placeholder") {
+      alert("Razorpay Key ID is not configured correctly.");
+      return;
+    }
+
     const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_placeholder", // Replace with your logic if needed
-      amount: amount * 100, // amount in the smallest currency unit
+      key: keyId,
+      amount: amount * 100,
       currency: "USD",
       name: "House of Extsy",
       description: `${planName} Subscription`,
       image: "/extsy-e-logo.png",
       handler: function (response: any) {
+        console.log("Payment Success:", response);
         alert("Payment Successful! ID: " + response.razorpay_payment_id);
+      },
+      modal: {
+        ondismiss: function () {
+          console.log("Checkout modal closed");
+        }
       },
       prefill: {
         name: "",
@@ -44,8 +61,13 @@ export default function Home() {
       },
     };
 
-    const rzp = new window.Razorpay(options);
-    rzp.open();
+    try {
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      console.error("Error opening Razorpay modal:", err);
+      alert("Could not open payment window. Check console for details.");
+    }
   };
 
   return (
@@ -53,7 +75,7 @@ export default function Home() {
       {/* Navbar */}
       <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-8 py-4 glass-card w-[90%] max-w-7xl border-white/20">
         <Link href="/">
-          <Image src="/extsy-e-logo.png" alt="House of Extsy" width={80} height={80} className="h-12 w-auto" />
+          <Image src="/extsy-e-logo.png" alt="House of Extsy" width={100} height={100} className="h-12 w-auto" />
         </Link>
         <div className="flex items-center gap-6">
           <Link href="https://calendly.com/extsystudios/30min" target="_blank" className="hidden md:block text-[13px] font-medium text-[#86868b] hover:text-[#1d1d1f] transition-colors duration-500">
@@ -122,24 +144,24 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Standard Plan */}
-              <div className="glass-card p-12 bg-white/40 group hover:bg-[#1d1d1f] hover:text-white transition-all duration-500 border-black/5">
+              <div className="glass-card p-12 bg-white/40 group hover:bg-[#1d1d1f] transition-all duration-500 border-black/5">
                 <div className="text-xs font-black uppercase tracking-widest text-[#86868b] group-hover:text-white/60 mb-2">Standard</div>
-                <div className="text-4xl font-black text-[#1d1d1f] group-hover:text-white mb-8">$4,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/60">/mo</span></div>
+                <div className="text-4xl font-black text-[#1d1d1f] group-hover:text-white mb-8 transition-colors duration-500">$4,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/60">/mo</span></div>
                 <button
                   onClick={() => handlePayment("Standard", 4995)}
-                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all active:scale-[0.98]"
+                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all active:scale-[0.98] border border-transparent shadow-lg"
                 >
                   Get Started
                 </button>
               </div>
 
               {/* Pro Plan */}
-              <div className="glass-card p-12 bg-[#1d1d1f]/[0.02] border-black/10 group hover:bg-[#1d1d1f] hover:text-white transition-all duration-500">
+              <div className="glass-card p-12 bg-[#1d1d1f]/[0.02] border-black/10 group hover:bg-[#1d1d1f] transition-all duration-500">
                 <div className="text-xs font-black uppercase tracking-widest text-[#86868b] group-hover:text-white/60 mb-2">Pro</div>
-                <div className="text-4xl font-black text-[#1d1d1f] group-hover:text-white mb-8">$6,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/60">/mo</span></div>
+                <div className="text-4xl font-black text-[#1d1d1f] group-hover:text-white mb-8 transition-colors duration-500">$6,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/60">/mo</span></div>
                 <button
                   onClick={() => handlePayment("Pro", 6995)}
-                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all active:scale-[0.98]"
+                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all active:scale-[0.98] border border-transparent shadow-lg"
                 >
                   Get Started
                 </button>
