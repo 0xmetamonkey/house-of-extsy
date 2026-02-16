@@ -1,8 +1,53 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { FadeIn, LiquidBlobs } from "./components";
 
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handlePayment = (planName: string, amount: number) => {
+    if (typeof window === "undefined" || !window.Razorpay) {
+      alert("Razorpay SDK not loaded. Please try again later.");
+      return;
+    }
+
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_placeholder", // Replace with your logic if needed
+      amount: amount * 100, // amount in the smallest currency unit
+      currency: "USD",
+      name: "House of Extsy",
+      description: `${planName} Subscription`,
+      image: "/extsy-e-logo.png",
+      handler: function (response: any) {
+        alert("Payment Successful! ID: " + response.razorpay_payment_id);
+      },
+      prefill: {
+        name: "",
+        email: "",
+        contact: "",
+      },
+      theme: {
+        color: "#1d1d1f",
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
   return (
     <div className="min-h-screen bg-[#fafafa] text-[#1d1d1f] flex flex-col">
       {/* Navbar */}
@@ -76,15 +121,28 @@ export default function Home() {
               <p className="text-xl text-[#86868b] mt-4">Unlimited requests. 48h delivery.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Standard Plan */}
               <div className="glass-card p-12 bg-white/40 group hover:bg-[#1d1d1f] hover:text-white transition-all duration-500 border-black/5">
                 <div className="text-xs font-black uppercase tracking-widest text-[#86868b] group-hover:text-white/60 mb-2">Standard</div>
-                <div className="text-3xl font-black text-[#1d1d1f] group-hover:text-white mb-6">$4,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/60">/mo</span></div>
-                <button className="w-full py-3 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-black rounded-full font-bold text-sm transition-all">Get Started</button>
+                <div className="text-4xl font-black text-[#1d1d1f] group-hover:text-white mb-8">$4,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/60">/mo</span></div>
+                <button
+                  onClick={() => handlePayment("Standard", 4995)}
+                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all active:scale-[0.98]"
+                >
+                  Get Started
+                </button>
               </div>
-              <div className="glass-card p-8 bg-[#1d1d1f]/[0.02] border-black/10 group hover:bg-[#1d1d1f] hover:text-white transition-all duration-500">
+
+              {/* Pro Plan */}
+              <div className="glass-card p-12 bg-[#1d1d1f]/[0.02] border-black/10 group hover:bg-[#1d1d1f] hover:text-white transition-all duration-500">
                 <div className="text-xs font-black uppercase tracking-widest text-[#86868b] group-hover:text-white/60 mb-2">Pro</div>
-                <div className="text-3xl font-black text-[#1d1d1f] group-hover:text-white mb-6">$6,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/60">/mo</span></div>
-                <button className="w-full py-3 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-black rounded-full font-bold text-sm transition-all">Get Started</button>
+                <div className="text-4xl font-black text-[#1d1d1f] group-hover:text-white mb-8">$6,995<span className="text-sm font-medium text-[#86868b] group-hover:text-white/60">/mo</span></div>
+                <button
+                  onClick={() => handlePayment("Pro", 6995)}
+                  className="w-full py-4 bg-[#1d1d1f] text-white group-hover:bg-white group-hover:text-[#1d1d1f] rounded-full font-bold text-base transition-all active:scale-[0.98]"
+                >
+                  Get Started
+                </button>
               </div>
             </div>
           </FadeIn>
@@ -92,8 +150,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 bg-[#fafafa] border-t border-black/5">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="py-16 px-6 bg-[#fafafa] border-t border-black/5">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-2xl font-black tracking-tight uppercase text-[#1d1d1f]">House of Extsy</div>
           <div className="flex gap-8 text-[13px] text-[#86868b]">
             <Link href="https://calendly.com/extsystudios/30min" target="_blank" className="hover:text-[#1d1d1f] transition-colors">Book a call</Link>

@@ -23,6 +23,7 @@ export default function RootLayout({
         className={`${inter.className} antialiased`}
       >
         {children}
+        <script src="https://checkout.razorpay.com/v1/checkout.js" async />
       </body>
     </html>
   );
