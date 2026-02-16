@@ -53,7 +53,7 @@ export default function Home() {
               </Link>
 
               <Link
-                href="https://wa.me/YOUR_NUMBER"
+                href="https://wa.me/918010470077"
                 target="_blank"
                 className="w-full sm:w-auto px-10 py-5 bg-white border border-black/10 text-[#1d1d1f] rounded-full font-bold text-lg hover:bg-black/5 transition-all duration-500 flex items-center justify-center gap-3"
               >
@@ -97,7 +97,7 @@ export default function Home() {
           <div className="text-2xl font-black tracking-tight uppercase text-[#1d1d1f]">House of Extsy</div>
           <div className="flex gap-8 text-[13px] text-[#86868b]">
             <Link href="https://calendly.com/houseofextsy/discovery" target="_blank" className="hover:text-[#1d1d1f] transition-colors">Book a call</Link>
-            <Link href="https://wa.me/YOUR_NUMBER" target="_blank" className="hover:text-[#1d1d1f] transition-colors">WhatsApp</Link>
+            <Link href="https://wa.me/918010470077" target="_blank" className="hover:text-[#1d1d1f] transition-colors">WhatsApp</Link>
             <span className="text-black/20">&copy; 2026 House of Extsy</span>
           </div>
         </div>
