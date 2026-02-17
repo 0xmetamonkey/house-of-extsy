@@ -171,7 +171,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-[#1d1d1f] flex flex-col selection:bg-black/5 selection:text-black scroll-smooth">
+    <div className="min-h-screen bg-white text-[#1d1d1f] flex flex-col selection:bg-black/5 selection:text-black scroll-smooth">
       {/* 1px Grid Background Layer */}
       <div className="fixed inset-0 z-0 opacity-[0.03] pointer-events-none" style={{
         backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`,
@@ -243,7 +243,7 @@ export default function Home() {
       )}
 
       {/* Main Hero Section */}
-      <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden bg-white">
         <LiquidBlobs />
 
         <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
@@ -357,7 +357,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-24 px-6 bg-[#fafafa] border-t border-black/5 relative z-10">
+      <footer className="py-24 px-6 bg-white border-t border-black/5 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="flex flex-col items-center md:items-start gap-3">
             <div className="text-3xl font-black tracking-tighter uppercase text-[#1d1d1f]">House of Extsy</div>
