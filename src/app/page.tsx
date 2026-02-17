@@ -186,10 +186,13 @@ export default function Home() {
         <div className="flex items-center gap-6">
           <button
             onClick={() => setShowAbout(true)}
-            className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#86868b] hover:text-[#1d1d1f] transition-colors duration-500"
+            className="hidden md:block text-[13px] font-medium text-[#86868b] hover:text-[#1d1d1f] transition-colors duration-500"
           >
-            // About.us
+            About
           </button>
+          <Link href="https://calendly.com/extsystudios/30min" target="_blank" className="hidden md:block text-[13px] font-medium text-[#86868b] hover:text-[#1d1d1f] transition-colors duration-500">
+            Book a call
+          </Link>
           <Link href="#pricing" className="px-6 py-2.5 text-[13px] font-semibold bg-[#1d1d1f] text-white rounded-full hover:bg-black transition-all duration-500 hover:shadow-[0_8px_20px_rgba(0,0,0,0.2)] active:scale-95">
             View Plans
           </Link>
